@@ -1,5 +1,5 @@
 import React, { type JSX } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import type { VirtualizedListProps } from './types/types';
 
 const defaultProps: Partial<VirtualizedListProps> = {
@@ -14,6 +14,7 @@ function VirtualizedList(props: VirtualizedListProps): JSX.Element {
   return (
     <View>
       <Text style={labelStyle}>{labelText}</Text>
+      <TextInput />
     </View>
   );
 }

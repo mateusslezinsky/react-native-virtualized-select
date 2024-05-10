@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import VirtualizedList from 'react-native-virtualized-select';
+import VirtualizedCombo from 'react-native-virtualized-select';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <VirtualizedList labelText="Label"/>
+      <VirtualizedCombo labelText="Label"/>
     </View>
   );
 }

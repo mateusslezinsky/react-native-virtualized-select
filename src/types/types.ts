@@ -1,6 +1,6 @@
 import type { StyleProp, TextStyle } from 'react-native';
 
-export interface VirtualizedListProps {
+export interface VirtualizedComboProps {
   theme?: {
     labelStyle?: StyleProp<TextStyle>
   }

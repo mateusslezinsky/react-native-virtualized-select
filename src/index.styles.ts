@@ -18,5 +18,13 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600"
   },
+  sendButton: {
+    backgroundColor: "#007E69",
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 7,
+    borderRadius: 25,
+  },
+  clearButton: {}
 
 })

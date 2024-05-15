@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     fontWeight: "600"
   },
   sendButton: {
-    backgroundColor: "#4effe2",
+    backgroundColor: "lightgreen",
     alignItems: 'center',
     justifyContent: 'center',
     padding: 7,

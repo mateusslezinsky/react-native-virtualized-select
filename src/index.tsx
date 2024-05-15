@@ -2,6 +2,8 @@ import React, { type JSX, useRef } from 'react';
 import { Animated, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import type { VirtualizedComboProps } from './types/types';
 import { styles } from './index.styles';
+import SearchIcon from './components/icons/searchIcon.component';
+import CloseIcon from './components/icons/closeIcon.component';
 
 const defaultProps: Partial<VirtualizedComboProps> = {
   theme: {
@@ -45,20 +47,21 @@ function VirtualizedCombo({ theme = defaultProps.theme, labelText }: Virtualized
         <TextInput placeholder="Search here" style={styles.textInput} />
         <View style={styles.actionsView}>
           <TouchableOpacity style={styles.sendButton} onPress={onSearch}>
-            <Text>Open</Text>
+            <SearchIcon />
           </TouchableOpacity>
           <TouchableOpacity style={styles.clearButton} onPress={onClear}>
-            <Text>Close</Text>
+            <CloseIcon />
           </TouchableOpacity>
         </View>
       </View>
-        <Animated.FlatList
-          data={[{ key: 'a' }, { key: 'b' }]}
-          renderItem={({ item }) => <Text>{item.key}</Text>}
-          style={{ height: heightAnim }}
-        />
+      <Animated.FlatList
+        data={[{ key: 'a' }, { key: 'b' }]}
+        renderItem={({ item }) => <Text>{item.key}</Text>}
+        style={{ height: heightAnim }}
+      />
 
     </View>
   );
 }
+
 export default VirtualizedCombo;

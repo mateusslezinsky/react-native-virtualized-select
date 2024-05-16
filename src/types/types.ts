@@ -5,7 +5,7 @@ export type KeyValuePairType = {
   value: any;
 }
 
-type KeyValueFlatListType = Animated.WithAnimatedObject<ArrayLike<KeyValuePairType>>;
+export type KeyValueFlatListType = Animated.WithAnimatedObject<ArrayLike<KeyValuePairType>>;
 
 export interface VirtualizedComboProps {
   theme?: {

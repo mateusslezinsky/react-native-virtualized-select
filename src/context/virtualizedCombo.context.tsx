@@ -1,9 +1,8 @@
-import React, { createContext, type MutableRefObject, type ReactNode, useContext, useRef } from 'react';
-import type { KeyValuePairType } from '../types/types';
+import React, { createContext, type PropsWithChildren, useContext, useRef } from 'react';
+import type { VirtualizedComboProps } from '../types/types';
 import { Animated } from 'react-native';
 
-export type VirtualizedComboContextProps = {
-  data: MutableRefObject<ArrayLike<KeyValuePairType> | null>;
+export interface VirtualizedComboContextProps extends VirtualizedComboProps {
   heightAnim: Animated.Value,
   heightIn: () => void;
   heightOut: () => void;
@@ -11,10 +10,9 @@ export type VirtualizedComboContextProps = {
 
 export const VirtualizedComboContext = createContext<VirtualizedComboContextProps | null>(null);
 
-export const useVirtualizedComboContext = () => useContext<VirtualizedComboContextProps>(VirtualizedComboContext as any);
+export const useVirtualizedComboContext = () => useContext<Required<VirtualizedComboContextProps>>(VirtualizedComboContext as any);
 
-export const VirtualizedComboProvider = ({ children }: { children: ReactNode }) => {
-  const data = useRef<ArrayLike<KeyValuePairType>>(null);
+export const VirtualizedComboProvider = ({ children, ...props }: PropsWithChildren<VirtualizedComboProps>) => {
   const heightAnim = useRef(new Animated.Value(0)).current;
 
   const heightIn = () => {
@@ -34,7 +32,7 @@ export const VirtualizedComboProvider = ({ children }: { children: ReactNode }) 
   };
 
   return <VirtualizedComboContext.Provider value={{
-    data,
+    ...props,
     heightAnim,
     heightIn,
     heightOut,

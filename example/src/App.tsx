@@ -3,32 +3,15 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import VirtualizedCombo from 'react-native-virtualized-select';
 
-const sampleTestValue = [
-  {
-    key: '1',
-    value: 'First Value',
-  },
-  {
-    key: '2',
-    value: 'Second Value',
-  },
-  {
-    key: "3",
-    value: "Third Value"
-  },
-  {
-    key: "4",
-    value: "Fourth Value"
-  }
+const generatedArray = Array.from({ length: 1000 }, (_, i) => ({key: i.toString(), value: `Position ${i.toString()}`}) );
 
-];
 
 export default function App() {
   return (
     <View style={styles.container}>
       <VirtualizedCombo
         labelText="Search patients"
-        data={sampleTestValue}
+        data={generatedArray}
       />
     </View>
   );

@@ -1,9 +1,9 @@
-import { styles } from '../../index.styles';
+import { styles } from '../../../index.styles';
 import { TouchableOpacity, View } from 'react-native';
-import SearchIcon from '../icons/searchIcon.component';
-import CloseIcon from '../icons/closeIcon.component';
+import SearchIcon from '../../icons/searchIcon.component';
+import CloseIcon from '../../icons/closeIcon.component';
 import React from 'react';
-import { useVirtualizedComboContext } from '../../context/virtualizedCombo.context';
+import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.context';
 
 export default function VirtualizedActionsSection() {
   const { heightIn, heightOut } = useVirtualizedComboContext()

@@ -1,19 +1,13 @@
 import type { PropsWithChildren } from 'react';
-import { useVirtualizedComboContext } from '../../context/virtualizedCombo.context';
-import VirtualizedFlatListSection from './virtualizedFlatListSection.component';
-import type { KeyValuePairType, VirtualizedComboProps } from '../../types/types';
-import VirtualizedActionsSection from './virtualizedActionsSection.component';
+import type { VirtualizedComboProps } from '../../types/types';
+import VirtualizedInputSection from './input/virtualizedInputSection.component';
+import VirtualizedFlatListSection from './combo/virtualizedFlatListSection.component';
 
-function VirtualizedSections({ children, ...props }: PropsWithChildren<Partial<VirtualizedComboProps>>) {
-  const { data } = useVirtualizedComboContext();
-
-  if (props?.data) {
-    data.current = props.data as ArrayLike<KeyValuePairType>;
-  }
+function VirtualizedSections({ children }: PropsWithChildren<Partial<VirtualizedComboProps>>) {
   return children;
 }
 
+VirtualizedSections.Input = VirtualizedInputSection;
 VirtualizedSections.FlatList = VirtualizedFlatListSection;
-VirtualizedSections.Actions = VirtualizedActionsSection;
 
 export default VirtualizedSections;

@@ -1,11 +1,17 @@
 import React, { createContext, type PropsWithChildren, useContext, useRef } from 'react';
-import type { VirtualizedComboProps } from '../types/types';
+import type { KeyValuePairType, VirtualizedComboProps } from '../types/types';
 import { Animated } from 'react-native';
+import { type Updater, useImmer } from 'use-immer';
 
 export interface VirtualizedComboContextProps extends VirtualizedComboProps {
   heightAnim: Animated.Value,
   heightIn: () => void;
   heightOut: () => void;
+  inputText: string;
+  updateInputText: Updater<string>;
+  mutableData: KeyValuePairType[];
+  updateMutableData: Updater<KeyValuePairType[]>;
+
 }
 
 export const VirtualizedComboContext = createContext<VirtualizedComboContextProps | null>(null);
@@ -30,12 +36,18 @@ export const VirtualizedComboProvider = ({ children, ...props }: PropsWithChildr
       useNativeDriver: false,
     }).start();
   };
+  const [inputText, updateInputText] = useImmer<string>('');
+  const [mutableData, updateMutableData] = useImmer<KeyValuePairType[]>(props.data as KeyValuePairType[]);
 
   return <VirtualizedComboContext.Provider value={{
     ...props,
     heightAnim,
     heightIn,
     heightOut,
+    inputText,
+    updateInputText,
+    mutableData,
+    updateMutableData,
   }}>
     {children}
   </VirtualizedComboContext.Provider>;

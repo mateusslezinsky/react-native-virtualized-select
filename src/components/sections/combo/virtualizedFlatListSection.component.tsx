@@ -4,18 +4,24 @@ import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.co
 import { styles } from './virtualizedFlatListSection.styles';
 
 export default function VirtualizedFlatListSection() {
-  const { shouldDisplayInComboBox, data, heightAnim } = useVirtualizedComboContext();
+  const { heightOut, updateInputText, mutableData, shouldDisplayInComboBox, heightAnim } = useVirtualizedComboContext();
+
+  const onSelect = (value: string) => {
+    updateInputText(value);
+    heightOut();
+  };
 
   return (
     <Animated.FlatList
-      data={data}
+      data={mutableData}
       contentContainerStyle={styles.flatListContainer}
-      renderItem={({ item }) =>
-        <TouchableOpacity style={styles.flatListTouchable}>
+      keyExtractor={({ key }) => key}
+      renderItem={({ item: { key, value } }) =>
+        <TouchableOpacity onPress={() => onSelect(value)} style={styles.flatListTouchable}>
           <Text style={styles.flatListTouchableText}>
             {shouldDisplayInComboBox === 'key' ?
-              item.key
-              : item.value
+              key
+              : value
             }
           </Text>
         </TouchableOpacity>

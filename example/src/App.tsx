@@ -18,13 +18,12 @@ export default function App() {
     <View style={styles.container}>
       <VirtualizedCombo
         labelText="Select a patient"
-        inputPlaceholder="Search patients"
         value={selectedPatient}
         onSelect={setSelectedPatient}
-        onClear={() => setSelectedPatient(initialValue)}
         data={generatedArray}
+        inputPlaceholder="Search patients"
+        onClear={() => setSelectedPatient(initialValue)}
         fallbackOnNotFound="No patients were found!"
-
         />
     </View>
   );

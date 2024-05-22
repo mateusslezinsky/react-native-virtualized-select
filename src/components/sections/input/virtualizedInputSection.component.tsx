@@ -5,7 +5,7 @@ import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.co
 import VirtualizedActionsSection from '../actions/virtualizedActionsSection.component';
 
 export default function VirtualizedInputSection({ children }: { children: ReactNode }) {
-  const { inputText, updateInputText, labelText, theme: { labelStyle } } = useVirtualizedComboContext();
+  const { inputPlaceholder, inputText, updateInputText, labelText, theme: { labelStyle } } = useVirtualizedComboContext();
   const onInputTextChange = (text: string) => {
     updateInputText(text)
   }
@@ -17,7 +17,7 @@ export default function VirtualizedInputSection({ children }: { children: ReactN
         <TextInput
           value={inputText}
           onChangeText={onInputTextChange}
-          placeholder="Search here"
+          placeholder={inputPlaceholder}
           style={styles.textInput} />
         <VirtualizedActionsSection />
       </View>

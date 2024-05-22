@@ -1,18 +1,31 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import { StyleSheet, View } from 'react-native';
 import VirtualizedCombo from 'react-native-virtualized-select';
 
-const generatedArray = Array.from({ length: 10000 }, (_, i) => ({key: i.toString(), value: `Position ${i.toString()}`}) );
+const generatedArray = Array.from({ length: 10000 }, (_, i) => ({
+  key: i.toString(),
+  value: `Patient ${i.toString()}`,
+}));
 
+const initialValue = { key: '0', value: 'Patient 0' };
 
 export default function App() {
+  const [selectedPatient, setSelectedPatient] = useState<typeof initialValue>(initialValue);
+
   return (
     <View style={styles.container}>
       <VirtualizedCombo
-        labelText="Search patients"
+        labelText="Select a patient"
+        inputPlaceholder="Search patients"
+        value={selectedPatient}
+        onSelect={setSelectedPatient}
+        onClear={() => setSelectedPatient(initialValue)}
         data={generatedArray}
-      />
+        fallbackOnNotFound="No patients were found!"
+
+        />
     </View>
   );
 }

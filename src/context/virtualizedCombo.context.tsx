@@ -11,7 +11,6 @@ export interface VirtualizedComboContextProps extends VirtualizedComboProps {
   updateInputText: Updater<string>;
   mutableData: KeyValuePairType[];
   updateMutableData: Updater<KeyValuePairType[]>;
-
 }
 
 export const VirtualizedComboContext = createContext<VirtualizedComboContextProps | null>(null);
@@ -20,6 +19,8 @@ export const useVirtualizedComboContext = () => useContext<Required<VirtualizedC
 
 export const VirtualizedComboProvider = ({ children, ...props }: PropsWithChildren<VirtualizedComboProps>) => {
   const heightAnim = useRef(new Animated.Value(0)).current;
+  const [inputText, updateInputText] = useImmer<string>('');
+  const [mutableData, updateMutableData] = useImmer<KeyValuePairType[]>(props.data as KeyValuePairType[]);
 
   const heightIn = () => {
     Animated.timing(heightAnim, {
@@ -36,8 +37,6 @@ export const VirtualizedComboProvider = ({ children, ...props }: PropsWithChildr
       useNativeDriver: false,
     }).start();
   };
-  const [inputText, updateInputText] = useImmer<string>('');
-  const [mutableData, updateMutableData] = useImmer<KeyValuePairType[]>(props.data as KeyValuePairType[]);
 
   return <VirtualizedComboContext.Provider value={{
     ...props,

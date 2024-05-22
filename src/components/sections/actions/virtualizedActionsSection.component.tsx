@@ -7,32 +7,50 @@ import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.co
 import type { KeyValuePairType } from '../../../types/types';
 
 export default function VirtualizedActionsSection() {
-  const { heightIn, heightOut, updateInputText, mutableData, updateMutableData, inputText, data } = useVirtualizedComboContext()
+  const {
+    theme: {
+      searchButtonStyle,
+      clearButtonStyle,
+      searchButtonIconSize,
+      searchButtonIconColor,
+      clearButtonIconColor,
+      clearButtonIconSize,
+    },
+    onClear: onClearFromClientSide,
+    heightIn,
+    heightOut,
+    updateInputText,
+    mutableData,
+    updateMutableData,
+    inputText,
+    data,
+  } = useVirtualizedComboContext();
 
   const onSearch = () => {
     heightIn();
     updateMutableData(draft =>
       draft = inputText.length ?
-        (draft as KeyValuePairType[]).filter(({value}) => value.toLowerCase().includes(inputText.toLowerCase())) :
-        data as KeyValuePairType[]
-    )
+        (draft as KeyValuePairType[]).filter(({ value }) => value.toLowerCase().includes(inputText.toLowerCase())) :
+        data as KeyValuePairType[],
+    );
   };
 
   const onClear = () => {
-    heightOut();
-    updateInputText("");
+    if (!inputText.length) heightOut();
+    updateInputText('');
+    onClearFromClientSide();
     if (data.length === mutableData.length) return;
     updateMutableData(data as KeyValuePairType[]);
   };
 
   return (
     <View style={styles.actionsView}>
-      <TouchableOpacity style={styles.sendButton} onPress={onSearch}>
-        <SearchIcon />
+      <TouchableOpacity style={[styles.sendButton, searchButtonStyle]} onPress={onSearch}>
+        <SearchIcon color={searchButtonIconColor} size={searchButtonIconSize}/>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.clearButton} onPress={onClear}>
-        <CloseIcon />
+      <TouchableOpacity style={[styles.clearButton, clearButtonStyle]} onPress={onClear}>
+        <CloseIcon color={clearButtonIconColor} size={clearButtonIconSize}/>
       </TouchableOpacity>
     </View>
-  )
+  );
 }

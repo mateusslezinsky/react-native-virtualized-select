@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   flatListContainer: {
-    flexGrow: 1
+    flexGrow: 1,
+
   },
   flatListTouchable: {
     marginTop: 10,
@@ -19,5 +20,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     flex: 1,
-  }
+  },
+
 })

@@ -18,7 +18,9 @@ const defaultProps: Partial<VirtualizedComboProps> = {
   },
   shouldDisplayInComboBox: 'value',
   inputPlaceholder: 'Search...',
-  onClear: () => {},
+  onClear: () => {
+  },
+  display: "outline"
 };
 
 function VirtualizedCombo({
@@ -26,6 +28,7 @@ function VirtualizedCombo({
                             shouldDisplayInComboBox = defaultProps.shouldDisplayInComboBox,
                             inputPlaceholder = defaultProps.inputPlaceholder,
                             onClear = defaultProps.onClear,
+                            display = defaultProps.display,
                             ...props
                           }: VirtualizedComboProps): JSX.Element {
 
@@ -35,11 +38,13 @@ function VirtualizedCombo({
       shouldDisplayInComboBox={shouldDisplayInComboBox}
       inputPlaceholder={inputPlaceholder}
       onClear={onClear}
+      display={display}
       {...props}
     >
       <VirtualizedSections>
         <VirtualizedSections.Input>
           <VirtualizedSections.FlatList />
+
         </VirtualizedSections.Input>
       </VirtualizedSections>
     </VirtualizedComboProvider>

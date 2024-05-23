@@ -24,6 +24,7 @@ export default function App() {
         inputPlaceholder="Search patients"
         onClear={() => setSelectedPatient(initialValue)}
         fallbackOnNotFound="No patients were found!"
+
         />
     </View>
   );

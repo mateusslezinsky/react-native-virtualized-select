@@ -45,6 +45,9 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     alignItems: "center"
-
+  },
+  bottomLine: {
+    borderWidth: 1,
+    borderColor: "#ececec",
   }
 })

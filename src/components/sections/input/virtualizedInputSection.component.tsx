@@ -5,14 +5,21 @@ import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.co
 import VirtualizedActionsSection from '../actions/virtualizedActionsSection.component';
 
 export default function VirtualizedInputSection({ children }: { children: ReactNode }) {
-  const { inputPlaceholder, inputText, updateInputText, labelText, theme: { labelStyle } } = useVirtualizedComboContext();
+  const {
+    display,
+    inputPlaceholder,
+    inputText,
+    updateInputText,
+    labelText,
+    theme: { labelStyle },
+  } = useVirtualizedComboContext();
   const onInputTextChange = (text: string) => {
-    updateInputText(text)
-  }
+    updateInputText(text);
+  };
 
   return (
-    <View style={styles.mainView}>
-      <Text style={[styles.label, labelStyle]}>{labelText}</Text>
+    <View style={[styles.mainView, { borderWidth: display === 'standard' ? 0 : styles.mainView.borderWidth }]}>
+      {display === 'outline' && <Text style={[styles.label, labelStyle]}>{labelText}</Text>}
       <View style={styles.innerView}>
         <TextInput
           value={inputText}
@@ -21,6 +28,7 @@ export default function VirtualizedInputSection({ children }: { children: ReactN
           style={styles.textInput} />
         <VirtualizedActionsSection />
       </View>
+      {display === "standard" && <View style={styles.bottomLine}/>}
       {children}
     </View>
   );

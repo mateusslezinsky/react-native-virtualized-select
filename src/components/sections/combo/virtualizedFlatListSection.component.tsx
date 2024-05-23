@@ -22,6 +22,7 @@ export default function VirtualizedFlatListSection() {
   };
 
   return (
+    <>
     <Animated.FlatList
       data={mutableData}
       contentContainerStyle={styles.flatListContainer}
@@ -43,6 +44,10 @@ export default function VirtualizedFlatListSection() {
         :
         (fallbackOnNotFound as unknown as ComponentType<any>)
       }
-      style={[styles.flatListContainer, { height: heightAnim }]}></Animated.FlatList>
+      style={[styles.flatListContainer, {
+        height: heightAnim,
+      }]}>
+    </Animated.FlatList>
+    </>
   );
 }

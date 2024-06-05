@@ -1,5 +1,6 @@
 import { Animated, type StyleProp, type TextStyle, type ViewStyle } from 'react-native';
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
+import type { VirtualizedItemProps } from './virtualizedItemProps';
 
 export type KeyValuePairType = {
   key: string;
@@ -93,12 +94,12 @@ export interface VirtualizedComboProps {
    * @description The theme object that will be used to override default styling. See type signature below and further examples in the docs.
    * @type {ThemeProp}
    * @example {
-   *   labelStyle: {...styles};
-   *   inputStyle: {...styles};
-   *   comboStyle: {...styles};
-   *   searchButtonStyle: {...styles};
-   *   clearButtonStyle: {...styles};
-   *   outerContainerStyle: {...styles};
+   *   labelStyle: label styling that appears at the top (only on 'outline' display type);
+   *   inputStyle: TextInput styles (both display types);
+   *   comboStyle: combo View styles that wrap the combo box where data is displayed (both display types);
+   *   searchButtonStyle: search button container styling (both display types);
+   *   clearButtonStyle: clear button container styling (both display types);
+   *   outerContainerStyle: main container styling (both display types);
    *   searchButtonIconSize: 24;
    *   clearButtonIconSize: 24;
    *   searchButtonIconColor: '#000';
@@ -107,4 +108,14 @@ export interface VirtualizedComboProps {
    */
   theme?: ThemeProp
 
+  mode?: 'search' | 'select';
+
+  /**
+   * @description The custom item component that will be displayed in the combo box. If not provided, the default item component will be used.
+   * @type {FC}
+   * @example <CustomItemComponent />
+   */
+  customItemComponent?: FC<VirtualizedItemProps>;
 }
+
+export * from "./virtualizedItemProps"

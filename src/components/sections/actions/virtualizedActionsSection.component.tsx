@@ -24,14 +24,14 @@ export default function VirtualizedActionsSection() {
     updateMutableData,
     inputText,
     data,
+    mode,
   } = useVirtualizedComboContext();
 
   const onSearch = () => {
     heightIn();
-    updateMutableData(draft =>
-      draft = inputText.length ?
-        (draft as KeyValuePairType[]).filter(({ value }) => value.toLowerCase().includes(inputText.toLowerCase())) :
-        data as KeyValuePairType[],
+    if (mode === 'search') updateMutableData(inputText.length ?
+      (data as KeyValuePairType[]).filter(({ value }) => value.toLowerCase().includes(inputText.toLowerCase())) :
+      data as KeyValuePairType[],
     );
   };
 
@@ -46,10 +46,13 @@ export default function VirtualizedActionsSection() {
   return (
     <View style={styles.actionsView}>
       <TouchableOpacity style={[styles.sendButton, searchButtonStyle]} onPress={onSearch}>
-        <SearchIcon color={searchButtonIconColor} size={searchButtonIconSize}/>
+        {
+          mode === 'search' &&
+          <SearchIcon color={searchButtonIconColor} size={searchButtonIconSize} />
+        }
       </TouchableOpacity>
       <TouchableOpacity style={[styles.clearButton, clearButtonStyle]} onPress={onClear}>
-        <CloseIcon color={clearButtonIconColor} size={clearButtonIconSize}/>
+        <CloseIcon color={clearButtonIconColor} size={clearButtonIconSize} />
       </TouchableOpacity>
     </View>
   );

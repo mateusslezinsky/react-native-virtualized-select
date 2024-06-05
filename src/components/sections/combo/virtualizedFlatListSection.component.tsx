@@ -1,25 +1,15 @@
 import React, { type ComponentType } from 'react';
-import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Text, View } from 'react-native';
 import { useVirtualizedComboContext } from '../../../context/virtualizedCombo.context';
 import { styles } from './virtualizedFlatListSection.styles';
-import type { KeyValuePairType } from '../../../types/types';
+import VirtualizedItem from './virtualizedItem/virtualizedItem.component';
 
 export default function VirtualizedFlatListSection() {
   const {
     fallbackOnNotFound,
-    onSelect: onSelectFromClientSide,
-    heightOut,
-    updateInputText,
     mutableData,
-    shouldDisplayInComboBox,
     heightAnim,
   } = useVirtualizedComboContext();
-
-  const onSelect = (key: KeyValuePairType['key'], value: KeyValuePairType['value']) => {
-    updateInputText(shouldDisplayInComboBox === 'key' ? key : value);
-    heightOut();
-    onSelectFromClientSide({ key, value });
-  };
 
   return (
     <>
@@ -28,14 +18,7 @@ export default function VirtualizedFlatListSection() {
       contentContainerStyle={styles.flatListContainer}
       keyExtractor={({ key }) => key}
       renderItem={({ item: { key, value } }) =>
-        <TouchableOpacity onPress={() => onSelect(key, value)} style={styles.flatListTouchable}>
-          <Text style={styles.flatListTouchableText}>
-            {shouldDisplayInComboBox === 'key' ?
-              key
-              : value
-            }
-          </Text>
-        </TouchableOpacity>
+        <VirtualizedItem itemKey={key} itemValue={value}/>
       }
       ListEmptyComponent={typeof fallbackOnNotFound === 'string' ?
         <View style={styles.fallbackTextContainer}>

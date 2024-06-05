@@ -11,6 +11,15 @@ const generatedArray = Array.from({ length: 10000 }, (_, i) => ({
 
 const initialValue = { key: '0', value: 'Patient 0' };
 
+// function CustomItem({ itemValue }: VirtualizedItemProps) {
+//   return (
+//     <View>
+//       <Text>{itemValue}</Text>
+//       <Text>7352</Text>
+//     </View>
+//   );
+// }
+
 export default function App() {
   const [selectedPatient, setSelectedPatient] = useState<typeof initialValue>(initialValue);
 
@@ -24,8 +33,9 @@ export default function App() {
         inputPlaceholder="Search patients"
         onClear={() => setSelectedPatient(initialValue)}
         fallbackOnNotFound="No patients were found!"
-
-        />
+        display="outline"
+        mode="select"
+      />
     </View>
   );
 }
